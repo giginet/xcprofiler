@@ -20,7 +20,6 @@ module Xctracker
 
         opts.on("-v", "--[no-]verbose", "Show invalid location results") { |v| options.verbose = v }
         opts.on("-o [ORDER]", [:default, :time, :file], "Sort order") { |v| options.order = v }
-        opts.on("-r", "--reporters", Array, "List of reporter names") { |v| options.reporters = v }
         opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
       end
       parser.parse!(args)
