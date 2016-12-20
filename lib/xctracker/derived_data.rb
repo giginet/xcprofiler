@@ -21,7 +21,7 @@ module Xctracker
         }
 
         if derived_data.empty?
-          raise "Build log for #{product_name} is not found".red
+          raise 'Any matching derived data are not found'.red
         end
 
         derived_data.max { |data| data.updated_at }
