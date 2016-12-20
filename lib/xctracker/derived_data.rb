@@ -2,6 +2,36 @@ require 'zlib'
 
 module Xctracker
   class DerivedData
+    class << self
+      def all
+        pattern = File.join(derived_data_root, "**", "Logs", "Build", "*.xcactivitylog")
+        by_pattern(pattern)
+      end
+
+      def by_product_name(product_name)
+        pattern = File.join(derived_data_root, "#{product_name}-*", "Logs", "Build", "*.xcactivitylog")
+        by_pattern(pattern)
+      end
+
+      private
+
+      def by_pattern(pattern)
+        derived_data = Dir.glob(pattern).map { |path|
+          DerivedData.new(path)
+        }
+
+        if derived_data.empty?
+          raise "Build log for #{product_name} is not found".red
+        end
+
+        derived_data.max { |data| data.updated_at }
+      end
+
+      def derived_data_root
+        File.expand_path('~/Library/Developer/Xcode/DerivedData')
+      end
+    end
+
     def initialize(path)
       @path = path
     end

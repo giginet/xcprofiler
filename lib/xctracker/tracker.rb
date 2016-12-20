@@ -3,20 +3,26 @@ require 'colorize'
 
 module Xctracker
   class Tracker
-    attr_reader :product_name, :options
     attr_writer :reporters
+    attr_reader :derived_data
 
-    def initialize(product_name, options = {})
-      @product_name = product_name
-      @options = options
+    def self.by_product_name(product_name)
+      derived_data = DerivedData.by_product_name(product_name)
+      Tracker.new(derived_data)
+    end
+
+    def initialize(derived_data)
+      @derived_data = derived_data
     end
 
     def report!
-      latest_data = latest_derived_data(product_name)
+      if !derived_data.flag_enabled?
+        raise "Not enabled '-Xfrontend -debug-time-function-bodies' in this project".red
+      end
 
       reporters.each do |reporter|
         reporter = reporter
-        reporter.report!(latest_data.executions)
+        reporter.report!(derived_data.executions)
       end
     end
 
@@ -24,28 +30,6 @@ module Xctracker
 
     def reporters
       @reporters ||= [StandardOutputReporter.new(limit: options[:limit], order: options[:order])]
-    end
-
-    def latest_derived_data(product_name)
-      pattern = File.join(derived_data_root, "#{product_name}-*", "Logs", "Build", "*.xcactivitylog")
-      derived_data = Dir.glob(pattern).map { |path|
-        DerivedData.new(path)
-      }
-
-      if derived_data.empty?
-        raise "Build log for #{product_name} is not found".red
-      end
-
-      latest_data = derived_data.max { |data| data.updated_at }
-      if !latest_data.flag_enabled?
-        raise "Not enabled '-Xfrontend -debug-time-function-bodies' in this project".red
-      end
-
-      latest_data
-    end
-
-    def derived_data_root
-      File.expand_path('~/Library/Developer/Xcode/DerivedData')
     end
   end
 end

@@ -2,11 +2,11 @@ require "xctracker/derived_data"
 require "xctracker/execution"
 require "xctracker/tracker"
 require "xctracker/version"
-require  "xctracker/reporters/standard_output_reporter"
-require  "xctracker/reporters/json_reporter"
-require 'colorize'
-require 'optparse'
-require 'ostruct'
+require "xctracker/reporters/standard_output_reporter"
+require "xctracker/reporters/json_reporter"
+require "colorize"
+require "optparse"
+require "ostruct"
 
 module Xctracker
   class << self
@@ -30,7 +30,12 @@ module Xctracker
         exit 1
       end
 
-      tracker = Tracker.new(product_name, options)
+      order = options[:order] or :time
+
+      tracker = Tracker.by_product_name(product_name)
+      tracker.reporters = [
+        StandardOutputReporter.new(limit: options[:limit], order: order)
+      ]
       tracker.report!
     end
   end

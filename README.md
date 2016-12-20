@@ -4,7 +4,7 @@ Analyze build times of Swift projects
 
 ## Installation
 
-```ruby
+```
 gem install xctracker
 ```
 
@@ -17,9 +17,9 @@ $ xctracker [PRODUCT_NAME] [options]
 Sample output is here
 
 ```
-+-------------------------------------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
-| File                                                                                      | Line | Method name                                                                                                                              | Time(ms) |
-+-------------------------------------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
++--------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
+| File                                             | Line | Method name                                                                                                                              | Time(ms) |
++--------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
 | Phakchi/Sources/Phakchi/Interaction.swift        | 17   | get {}                                                                                                                                   | 69.9     |
 | Phakchi/Sources/Phakchi/Matcher.swift            | 7    | get {}                                                                                                                                   | 68.9     |
 | Phakchi/Sources/Phakchi/InteractionBuilder.swift | 87   | func clean()                                                                                                                             | 49.8     |
@@ -57,7 +57,7 @@ Sample output is here
 ```ruby
 require 'xctracker'
 
-tracker = Xctracker::Tracker.new('Phakchi')
+tracker = Xctracker::Tracker.by_product_name('Phakchi')
 tracker.reporters = [
   Xctracker::StandardOutputReporter.new(limit: 20, order: :time)],
   Xctracker::JSONReporter.new({output_path: 'result.json'})
