@@ -15,7 +15,8 @@ module Xctracker
     def filter_executions(executions)
       executions = sort_executions(executions, order)
       executions = executions.delete_if(&:invalid?) unless verbose?
-      executions[0...limit] if limit
+      executions = executions[0...limit] if limit
+      executions
     end
 
     def sort_executions(executions, order)

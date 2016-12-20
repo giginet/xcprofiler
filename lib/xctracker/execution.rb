@@ -17,11 +17,11 @@ module Xctracker
 
     def to_h
       {
-        method_name: execution.method_name,
-        time: execution.time,
-        path: execution.path,
-        line: execution.line,
-        column: execution.column
+        method_name: method_name,
+        time: time,
+        path: path,
+        line: line,
+        column: column
       }
     end
 

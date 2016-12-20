@@ -3,6 +3,7 @@ require "xctracker/execution"
 require "xctracker/tracker"
 require "xctracker/version"
 require  "xctracker/reporters/standard_output_reporter"
+require  "xctracker/reporters/json_reporter"
 require 'colorize'
 require 'optparse'
 require 'ostruct'

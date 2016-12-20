@@ -4,8 +4,9 @@ require 'colorize'
 module Xctracker
   class Tracker
     attr_reader :product_name, :options
+    attr_writer :reporters
 
-    def initialize(product_name, options)
+    def initialize(product_name, options = {})
       @product_name = product_name
       @options = options
     end
