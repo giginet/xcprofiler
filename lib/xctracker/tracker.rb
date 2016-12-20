@@ -13,15 +13,17 @@ module Xctracker
     def report!
       latest_data = latest_derived_data(product_name)
 
-      executions = latest_data.sorted_executions(order)
-      executions = executions.delete_if(&:invalid?) unless verbose?
-      executions = executions[0...limit] if limit
-
-      f = formatter(executions)
-      puts f.table
+      reporters.each do |reporter|
+        reporter = reporter
+        reporter.report!(latest_data.executions)
+      end
     end
 
     private
+
+    def reporters
+      @reporters ||= [StandardOutputReporter.new(limit: options[:limit], order: options[:order])]
+    end
 
     def latest_derived_data(product_name)
       pattern = File.join(derived_data_root, "#{product_name}-*", "Logs", "Build", "*.xcactivitylog")
@@ -39,22 +41,6 @@ module Xctracker
       end
 
       latest_data
-    end
-
-    def limit
-      options[:limit]
-    end
-
-    def verbose?
-      options[:verbose]
-    end
-
-    def order
-      options[:order]
-    end
-
-    def formatter(executions)
-      Formatter.new(executions)
     end
 
     def derived_data_root

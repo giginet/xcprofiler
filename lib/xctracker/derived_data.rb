@@ -19,17 +19,6 @@ module Xctracker
       }.compact
     end
 
-    def sorted_executions(order)
-      case order
-        when :default
-          executions
-        when :time
-          executions.sort { |a, b| [b.time, a.filename, a.line] <=> [a.time, b.filename, b.line] }
-        when :file
-          executions.sort_by { |e| [e.filename, e.line] }
-      end
-    end
-
     def flag_enabled?
       lines.any? { |l| l.include?('-Xfrontend -debug-time-function-bodies') }
     end

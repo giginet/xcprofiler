@@ -1,8 +1,8 @@
 require "xctracker/derived_data"
 require "xctracker/execution"
-require "xctracker/formatter"
 require "xctracker/tracker"
 require "xctracker/version"
+require  "xctracker/reporters/standard_output_reporter"
 require 'colorize'
 require 'optparse'
 require 'ostruct'
@@ -12,6 +12,7 @@ module Xctracker
     def execute(args)
       options = OpenStruct.new
       options.order = :time
+      options.reporters = [:standard_output]
 
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: xctracker [filename] [options]".red
