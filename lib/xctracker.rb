@@ -1,5 +1,6 @@
 require "xctracker/derived_data"
 require "xctracker/execution"
+require "xctracker/formatter"
 require "xctracker/tracker"
 require "xctracker/version"
 require 'colorize'

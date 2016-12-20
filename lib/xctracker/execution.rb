@@ -15,6 +15,10 @@ module Xctracker
       @method_name = method_name
     end
 
+    def invalid?
+      !position
+    end
+
     def filename
       if @position
         File.basename(@position.filepath)
