@@ -23,7 +23,7 @@ module Xctracker
 
     def lines
       unless @lines
-        Zlib::GzipReader.open(path) do |gz|
+        Zlib::GzipReader.open(@path) do |gz|
           @lines = gz.read.split(/\r/)
         end
       end
