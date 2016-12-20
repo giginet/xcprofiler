@@ -14,8 +14,12 @@ module Xctracker
           raise "Build log for #{product_name} is not found".red
         end
 
-        last_data = derived_data.max { |data| data.updated_at }
-        f = formatter(last_data.executions)
+        latest_data = derived_data.max { |data| data.updated_at }
+        if !latest_data.flag_enabled?
+          raise "Not enabled '-Xfrontend -debug-time-function-bodies' in this project".red
+        end
+
+        f = formatter(latest_data.executions)
         puts f.table
       end
 

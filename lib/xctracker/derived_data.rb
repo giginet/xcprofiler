@@ -19,6 +19,10 @@ module Xctracker
       }.compact
     end
 
+    def flag_enabled?
+      lines.any? { |l| l.include?('-Xfrontend -debug-time-function-bodies') }
+    end
+
     private
 
     def lines
