@@ -28,7 +28,11 @@ module Xctracker
     end
 
     def line
-      @position&.line
+      if @position
+        @position.line
+      else
+        nil
+      end
     end
   end
 end

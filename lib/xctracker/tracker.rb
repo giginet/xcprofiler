@@ -1,4 +1,5 @@
 require 'terminal-table'
+require 'colorize'
 
 module Xctracker
   class Tracker
@@ -8,7 +9,13 @@ module Xctracker
         derived_data = Dir.glob(pattern).map { |path|
           DerivedData.new(path)
         }
-        f = formatter(derived_data.first.parse_executions)
+
+        if derived_data.empty?
+          raise "Build log for #{product_name} is not found".red
+        end
+
+        last_data = derived_data.max { |data| data.updated_at }
+        f = formatter(last_data.executions)
         puts f.table
       end
 

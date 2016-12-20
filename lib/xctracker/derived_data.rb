@@ -10,8 +10,8 @@ module Xctracker
       File.mtime(@path)
     end
 
-    def parse_executions
-      lines.map { |line|
+    def executions
+      @executions ||= lines.map { |line|
         if line =~ /^\d*\.?\dms\t/
           time, file, method_name = line.split(/\t/)
           Execution.new(time, file, method_name)
