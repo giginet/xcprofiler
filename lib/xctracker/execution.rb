@@ -9,7 +9,7 @@ module Xctracker
       unless position =~ /<invalid loc>/
         filepath, line, column = position.split(':')
         if File.exist?(filepath)
-          @position = Struct::Position.new(filepath, line, column)
+          @position = Struct::Position.new(filepath, line.to_i, column.to_i)
         end
       end
       @method_name = method_name
@@ -23,7 +23,7 @@ module Xctracker
       if @position
         File.basename(@position.filepath)
       else
-        nil
+        ''
       end
     end
 
@@ -31,7 +31,7 @@ module Xctracker
       if @position
         @position.line
       else
-        nil
+        0
       end
     end
   end

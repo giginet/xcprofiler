@@ -21,8 +21,6 @@ module Xctracker
 
     def executions
       @executions ||= []
-      @executions = @executions.delete_if(&:invalid?)
-      @executions[0...@limit].sort { |a, b| b.time <=> a.time }
     end
   end
 end

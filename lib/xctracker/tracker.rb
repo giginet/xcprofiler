@@ -3,35 +3,62 @@ require 'colorize'
 
 module Xctracker
   class Tracker
-    class << self
-      def report(product_name, options)
-        pattern = File.join(derived_data_root, "#{product_name}-*", "Logs", "Build", "*.xcactivitylog")
-        derived_data = Dir.glob(pattern).map { |path|
-          DerivedData.new(path)
-        }
+    attr_reader :product_name, :options
 
-        if derived_data.empty?
-          raise "Build log for #{product_name} is not found".red
-        end
+    def initialize(product_name, options)
+      @product_name = product_name
+      @options = options
+    end
 
-        latest_data = derived_data.max { |data| data.updated_at }
-        if !latest_data.flag_enabled?
-          raise "Not enabled '-Xfrontend -debug-time-function-bodies' in this project".red
-        end
+    def report!
+      latest_data = latest_derived_data(product_name)
 
-        f = formatter(latest_data.executions)
-        puts f.table
+      executions = latest_data.sorted_executions(order)
+      executions = executions.delete_if(&:invalid?) unless verbose?
+      executions = executions[0...limit] if limit
+
+      f = formatter(executions)
+      puts f.table
+    end
+
+    private
+
+    def latest_derived_data(product_name)
+      pattern = File.join(derived_data_root, "#{product_name}-*", "Logs", "Build", "*.xcactivitylog")
+      derived_data = Dir.glob(pattern).map { |path|
+        DerivedData.new(path)
+      }
+
+      if derived_data.empty?
+        raise "Build log for #{product_name} is not found".red
       end
 
-      private
-
-      def formatter(executions)
-        Formatter.new(executions)
+      latest_data = derived_data.max { |data| data.updated_at }
+      if !latest_data.flag_enabled?
+        raise "Not enabled '-Xfrontend -debug-time-function-bodies' in this project".red
       end
 
-      def derived_data_root
-        File.expand_path('~/Library/Developer/Xcode/DerivedData')
-      end
+      latest_data
+    end
+
+    def limit
+      options[:limit]
+    end
+
+    def verbose?
+      options[:verbose]
+    end
+
+    def order
+      options[:order]
+    end
+
+    def formatter(executions)
+      Formatter.new(executions)
+    end
+
+    def derived_data_root
+      File.expand_path('~/Library/Developer/Xcode/DerivedData')
     end
   end
 end

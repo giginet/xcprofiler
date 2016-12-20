@@ -5,25 +5,32 @@ require "xctracker/tracker"
 require "xctracker/version"
 require 'colorize'
 require 'optparse'
+require 'ostruct'
 
 module Xctracker
   class << self
     def execute(args)
+      options = OpenStruct.new
+      options.order = :time
+
+      parser = OptionParser.new do |opts|
+        opts.banner = "Usage: xctracker [filename] [options]".red
+
+        opts.on("-v", "--[no-]verbose", "Show invalid location results") { |v| options.verbose = v }
+        opts.on("-o [ORDER]", [:default, :time, :file], "Sort order") { |v| options.order = v }
+        opts.on("-r", "--reporters", Array, "List of reporter names") { |v| options.reporters = v }
+        opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
+      end
+      parser.parse!(args)
+
       product_name = args.pop
       unless product_name
         raise "Usage: xctracker [product_name] [options]".red
         exit 1
       end
 
-      parser = OptionParser.new do |opts|
-        opts.banner = "Usage: xctracker [filename] [options]".red
-
-        opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
-          options[:verbose] = v
-        end
-      end
-      options = parser.parse!(args)
-      Tracker.report(product_name, options)
+      tracker = Tracker.new(product_name, options)
+      tracker.report!
     end
   end
 end
