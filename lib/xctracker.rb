@@ -17,23 +17,31 @@ module Xctracker
       options.reporters = [:standard_output]
 
       parser = OptionParser.new do |opts|
-        opts.banner = "Usage: xctracker [filename] [options]".red
+        opts.banner = "Usage: xctracker [product name or .xcactivitylog file] [options]".red
 
         opts.on("--[no-]show-invalids", "Show invalid location results") { |v| options.show_invalid_locations = v }
         opts.on("-o [ORDER]", [:default, :time, :file], "Sort order") { |v| options.order = v }
         opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
+        opts.on_tail("-h", "--help", "Show this message") do
+          puts opts
+          exit
+        end
       end
       parser.parse!(args)
 
-      product_name = args.pop
-      unless product_name
-        raise "Usage: xctracker [product_name] [options]".red
+      target = args.pop
+      unless target
+        puts parser
         exit 1
       end
 
       order = options[:order] or :time
 
-      tracker = Tracker.by_product_name(product_name)
+      if target.end_with?('.xcactivitylog')
+        tracker = Tracker.by_path(target)
+      else
+        tracker = Tracker.by_product_name(target)
+      end
       tracker.reporters = [
         StandardOutputReporter.new(limit: options[:limit],
                                    order: order,
