@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/giginet/xctracker.svg?branch=master)](https://travis-ci.org/giginet/xctracker)
 [![Coverage Status](https://coveralls.io/repos/github/giginet/xctracker/badge.svg?branch=master)](https://coveralls.io/github/giginet/xctracker?branch=master)
+[![Gem Version](https://badge.fury.io/rb/xctracker.svg)](https://badge.fury.io/rb/xctracker)
 
 Command line interface to analyze build times of Swift projects
 
