@@ -24,7 +24,7 @@ module Xctracker
           raise DerivedDataNotFound, 'Any matching derived data are not found'
         end
 
-        derived_data.max { |data| data.updated_at }
+        derived_data.max_by { |data| data.updated_at }
       end
 
       def derived_data_root
