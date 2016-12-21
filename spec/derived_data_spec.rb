@@ -19,7 +19,7 @@ describe DerivedData do
         it 'raises' do
           expect {
             DerivedData.by_product_name('NotExist')
-          }.to raise_error('Any matching derived data are not found'.red)
+          }.to raise_error(DerivedDataNotFound, 'Any matching derived data are not found')
         end
       end
     end

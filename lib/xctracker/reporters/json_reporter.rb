@@ -5,7 +5,7 @@ module Xctracker
     def report!(executions)
       json = filter_executions(executions).map(&:to_h)
       unless output_path
-        raise '[JSONReporter] output_path is not specified'.red
+        raise OutputPathIsNotSpecified, '[JSONReporter] output_path is not specified'
       end
 
       File.open(output_path, "w") do |f|

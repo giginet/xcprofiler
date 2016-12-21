@@ -1,4 +1,5 @@
 require "xctracker/derived_data"
+require "xctracker/exceptions"
 require "xctracker/execution"
 require "xctracker/tracker"
 require "xctracker/version"
@@ -37,17 +38,21 @@ module Xctracker
 
       order = options[:order] or :time
 
-      if target.end_with?('.xcactivitylog')
-        tracker = Tracker.by_path(target)
-      else
-        tracker = Tracker.by_product_name(target)
+      begin
+        if target.end_with?('.xcactivitylog')
+          tracker = Tracker.by_path(target)
+        else
+          tracker = Tracker.by_product_name(target)
+        end
+        tracker.reporters = [
+          StandardOutputReporter.new(limit: options[:limit],
+                                     order: order,
+                                     show_invalid_locations: options[:show_invalid_locations])
+        ]
+        tracker.report!
+      rescue Exception => e
+        puts e.message.red
       end
-      tracker.reporters = [
-        StandardOutputReporter.new(limit: options[:limit],
-                                   order: order,
-                                   show_invalid_locations: options[:show_invalid_locations])
-      ]
-      tracker.report!
     end
   end
 end

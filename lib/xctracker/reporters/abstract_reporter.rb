@@ -7,7 +7,7 @@ module Xctracker
     end
 
     def report!(executions)
-      raise 'Not implemented'
+      raise NotImplementedError, 'Not implemented'
     end
 
     protected

@@ -17,7 +17,7 @@ describe Tracker do
       it 'raises error' do
         expect {
           tracker.report!
-        }.to raise_error("'-Xfrontend -debug-time-function-bodies' flag is not enabled".red)
+        }.to raise_error(BuildFlagIsNotEnabled, "'-Xfrontend -debug-time-function-bodies' flag is not enabled")
       end
     end
   end

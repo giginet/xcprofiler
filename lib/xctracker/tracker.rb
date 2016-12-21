@@ -22,7 +22,7 @@ module Xctracker
 
     def report!
       if !derived_data.flag_enabled?
-        raise "'-Xfrontend -debug-time-function-bodies' flag is not enabled".red
+        raise BuildFlagIsNotEnabled, "'-Xfrontend -debug-time-function-bodies' flag is not enabled"
       end
 
       reporters.each do |reporter|

@@ -21,7 +21,7 @@ module Xctracker
         }
 
         if derived_data.empty?
-          raise 'Any matching derived data are not found'.red
+          raise DerivedDataNotFound, 'Any matching derived data are not found'
         end
 
         derived_data.max { |data| data.updated_at }
