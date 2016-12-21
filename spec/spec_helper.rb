@@ -17,6 +17,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'xctracker'
+require 'coveralls'
+Coveralls.wear_merged!
+SimpleCov.merge_timeout 3600
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

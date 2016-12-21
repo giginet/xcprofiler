@@ -1,10 +1,13 @@
 # xctracker 
 
 [![Build Status](https://travis-ci.org/giginet/xctracker.svg?branch=master)](https://travis-ci.org/giginet/xctracker)
+[![Coverage Status](https://coveralls.io/repos/github/giginet/xctracker/badge.svg?branch=master)](https://coveralls.io/github/giginet/xctracker?branch=master)
 
 Command line interface to analyze build times of Swift projects
 
 ![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/sample_output.png)
+
+This tool developed in working time for Cookpad.
 
 ## Installation
 
@@ -14,7 +17,7 @@ gem install xctracker
 
 ## Usage
 
-- 0 Add `-Xfrontend -debug-time-function-bodies` build flags on your Xcode project.
+- 1 Add `-Xfrontend -debug-time-function-bodies` build flags on your Xcode project.
 
 ![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/build_flags.png)
 
@@ -89,6 +92,10 @@ tracker.report!
 You can also implement your own reporters.
 
 See implementation of built-in reporters for detail.
+
+## License
+
+MIT License
 
 ## Contributing
 
