@@ -11,4 +11,6 @@ rvm:
 matrix:
   include:
     - rvm: system
+      osx_image: xcode8.1
+      language: objective-c
     - rvm: 2.3.1
