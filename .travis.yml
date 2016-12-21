@@ -13,4 +13,5 @@ matrix:
     - rvm: system
       osx_image: xcode8.1
       language: objective-c
+      before_install: sudo gem install bundler
     - rvm: 2.3.1
