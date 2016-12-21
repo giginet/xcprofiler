@@ -1,6 +1,6 @@
 # xctracker
 
-Analyze build times of Swift projects
+Command line interface to analyze build times of Swift projects
 
 ## Installation
 
@@ -10,8 +10,21 @@ gem install xctracker
 
 ## Usage
 
+1. Add `-Xfrontend -debug-time-function-bodies` build flags on your Xcode project.
+2. Build your project
+3. Execute `xctracker`
+
 ```
-$ xctracker [PRODUCT_NAME] [options]
+$ xctracker [PRODUCT_NAME or ACTIVITY_LOG_PATH] [options]
+```
+
+`xctracker` searches the latest build log on your DerivedData directory.
+
+You can also specify the `.xcactivitylog`.
+
+```
+$ xctracker MyApp
+$ xctracker ~/Library/Developer/Xcode/DerivedData/MyApp-xxxxxxxxxxx/Logs/Build/0761C73D-3B6C-449A-BE89-6D11DAB748FE.xcactivitylog
 ```
 
 Sample output is here
@@ -48,16 +61,17 @@ Sample output is here
 |option|shorthand|description|
 |------|---------|-----------|
 |--limit|-l|Limit for display|
-|--verbose|-v|Show invalid location results|
-|--order|-o|Sort order (time,file)|
-
+|--show-invalids||Show invalid location results|
+|--order|-o|Sort order (default,time,file)|
 
 ## Use custom reporters
+
+You can use reporters to output tracking logs.
 
 ```ruby
 require 'xctracker'
 
-tracker = Xctracker::Tracker.by_product_name('Phakchi')
+tracker = Xctracker::Tracker.by_product_name('MyApp')
 tracker.reporters = [
   Xctracker::StandardOutputReporter.new(limit: 20, order: :time)],
   Xctracker::JSONReporter.new({output_path: 'result.json'})
@@ -65,7 +79,11 @@ tracker.reporters = [
 tracker.report!
 ```
 
+You can also implement your own reporters.
+
+See implementation of built-in reporters for detail.
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/xctracker.
+Bug reports and pull requests are welcome on GitHub at https://github.com/giginet/xctracker.
 
