@@ -1,7 +1,7 @@
 language: ruby
 cache: bundler
 script:
-  - "bundle exec rspec"
+  - "bundle exec rspec spec"
 rvm:
   # OS X 10.9.5-10.10.0 (2.0.0-p481)
   - 2.0.0-p481
