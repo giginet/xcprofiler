@@ -2,6 +2,7 @@ require "xctracker/derived_data"
 require "xctracker/execution"
 require "xctracker/tracker"
 require "xctracker/version"
+require "xctracker/reporters/abstract_reporter"
 require "xctracker/reporters/standard_output_reporter"
 require "xctracker/reporters/json_reporter"
 require "colorize"
@@ -18,7 +19,7 @@ module Xctracker
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: xctracker [filename] [options]".red
 
-        opts.on("-v", "--[no-]verbose", "Show invalid location results") { |v| options.verbose = v }
+        opts.on("--[no-]show-invalids", "Show invalid location results") { |v| options.show_invalid_locations = v }
         opts.on("-o [ORDER]", [:default, :time, :file], "Sort order") { |v| options.order = v }
         opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
       end
@@ -34,7 +35,9 @@ module Xctracker
 
       tracker = Tracker.by_product_name(product_name)
       tracker.reporters = [
-        StandardOutputReporter.new(limit: options[:limit], order: order)
+        StandardOutputReporter.new(limit: options[:limit],
+                                   order: order,
+                                   show_invalid_locations: options[:show_invalid_locations])
       ]
       tracker.report!
     end

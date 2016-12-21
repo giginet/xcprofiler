@@ -1,4 +1,3 @@
-require 'xctracker/reporters/abstract_reporter'
 require 'json'
 
 module Xctracker

@@ -14,7 +14,7 @@ module Xctracker
 
     def filter_executions(executions)
       executions = sort_executions(executions, order)
-      executions = executions.delete_if(&:invalid?) unless verbose?
+      executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
       executions = executions[0...limit] if limit
       executions
     end
@@ -34,8 +34,8 @@ module Xctracker
       options[:limit]
     end
 
-    def verbose?
-      options[:verbose] || false
+    def show_invalid_locations?
+      options[:show_invalid_locations] || false
     end
 
     def order

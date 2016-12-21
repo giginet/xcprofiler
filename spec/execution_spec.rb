@@ -3,10 +3,6 @@ include Xctracker
 
 describe Execution do
   context 'with location' do
-
-  end
-
-  context 'with invalid location' do
     let(:execution) { Execution.new('0.2ms', '/path/to/Source.swift:10:20', 'get') }
 
     describe '#invalid?' do

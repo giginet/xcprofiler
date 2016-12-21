@@ -1,4 +1,3 @@
-require 'xctracker/reporters/abstract_reporter'
 require 'terminal-table'
 
 module Xctracker
