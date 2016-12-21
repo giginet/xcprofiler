@@ -1,6 +1,10 @@
-# xctracker
+# xctracker 
+
+[![Build Status](https://travis-ci.org/giginet/xctracker.svg?branch=master)](https://travis-ci.org/giginet/xctracker)
 
 Command line interface to analyze build times of Swift projects
+
+![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/sample_output.png)
 
 ## Installation
 
@@ -10,9 +14,12 @@ gem install xctracker
 
 ## Usage
 
-1. Add `-Xfrontend -debug-time-function-bodies` build flags on your Xcode project.
-2. Build your project
-3. Execute `xctracker`
+- 0 Add `-Xfrontend -debug-time-function-bodies` build flags on your Xcode project.
+
+![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/build_flags.png)
+
+- 2 Build your project
+- 3 Execute `xctracker`
 
 ```
 $ xctracker [PRODUCT_NAME or ACTIVITY_LOG_PATH] [options]
