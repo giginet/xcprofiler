@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/giginet/xctracker/badge.svg?branch=master)](https://coveralls.io/github/giginet/xctracker?branch=master)
 [![Gem Version](https://badge.fury.io/rb/xctracker.svg)](https://badge.fury.io/rb/xctracker)
 
-Command line interface to analyze build times of Swift projects
+Command line utility to analyze build times of Swift projects
 
 ![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/sample_output.png)
 
@@ -18,12 +18,11 @@ gem install xctracker
 
 ## Usage
 
-- 1 Add `-Xfrontend -debug-time-function-bodies` build flags on your Xcode project.
+1. Add `-Xfrontend -debug-time-function-bodies` build flags in `Other Swift Flags` section on your Xcode project.
+    ![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/build_flags.png)
 
-![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/build_flags.png)
-
-- 2 Build your project
-- 3 Execute `xctracker`
+2. Build your project
+3. Execute `xctracker`
 
 ```
 $ xctracker [PRODUCT_NAME or ACTIVITY_LOG_PATH] [options]
@@ -51,7 +50,7 @@ Sample output is here
 | Phakchi/Sources/Phakchi/Session.swift            | 65   | @discardableResult public func willRespondWith(status: Int, headers: Headers? = default, body: Body? = default) -> Self                  | 28.3     |
 | Phakchi/Sources/Phakchi/ControlServer.swift      | 20   | public func startSession(consumerName: String, providerName: String, completion completionBlock: StartSessionCompletionBlock? = default) | 24.6     |
 | Phakchi/Sources/Phakchi/ControlServer.swift      | 24   | (closure)                                                                                                                                | 23.9     |
-| Phakchi/Sources/Phakchi/InteractionBuilder.swift | 19   | private func makeHeaders(_ headers: Headers?, defaultHeaders: Headers?) -> Headers?                                                      | 21.5     |
+| Phakchi/Sources/Phakchi/InteractionBuilder.swift | 19   | private func makeHeaders(_ headers: Headers?, defaultHeaders: Headers?) -> Headers?                                                      | 20.5     |
 | Phakchi/Sources/Phakchi/ServiceClient.swift      | 47   | func registerInteraction(_ interaction: Interaction, completionHandler: CompletionHandler? = default)                                    | 16.4     |
 | Phakchi/Sources/Phakchi/ServiceClient.swift      | 60   | func verify(_ completionHandler: VerificationCompletionHandler? = default)                                                               | 14.3     |
 | Phakchi/Sources/Phakchi/ServiceClient.swift      | 27   | func resumeSessionTask(_ request: URLRequest, completionHandler: CompletionHandler? = default)                                           | 13.3     |
@@ -64,7 +63,7 @@ Sample output is here
 | Phakchi/Sources/Phakchi/Encodable.swift          | 29   | get {}                                                                                                                                   | 3.4      |
 | Phakchi/Sources/Phakchi/ServiceClient.swift      | 72   | func writePact(for providerName: String, consumerName: String, exportPath: URL?, completionHandler: CompletionHandler? = default)        | 3.3      |
 | Phakchi/Sources/Phakchi/ServiceClient.swift      | 125  | (closure)                                                                                                                                | 3.1      |
-+-------------------------------------------------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
++--------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
 ```
 
 ### Available Options
@@ -92,7 +91,7 @@ tracker.report!
 
 You can also implement your own reporters.
 
-See implementation of built-in reporters for detail.
+See implementation of [built-in reporters](https://github.com/giginet/xctracker/tree/master/lib/xctracker/reporters) for detail.
 
 ## License
 
