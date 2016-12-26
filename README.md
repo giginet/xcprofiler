@@ -8,7 +8,7 @@ Command line utility to profile compilation time of Swift project.
 
 ![](https://raw.githubusercontent.com/giginet/xcprofiler/master/assets/sample_output.png)
 
-This tool developed in working time for Cookpad.
+This tool is developed in working time for Cookpad.
 
 ## Installation
 
