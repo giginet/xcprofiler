@@ -1,6 +1,6 @@
 require 'zlib'
 
-module Xctracker
+module Xcprofiler
   class DerivedData
     class << self
       def all

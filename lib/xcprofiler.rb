@@ -1,16 +1,16 @@
-require "xctracker/derived_data"
-require "xctracker/exceptions"
-require "xctracker/execution"
-require "xctracker/tracker"
-require "xctracker/version"
-require "xctracker/reporters/abstract_reporter"
-require "xctracker/reporters/standard_output_reporter"
-require "xctracker/reporters/json_reporter"
+require "xcprofiler/derived_data"
+require "xcprofiler/exceptions"
+require "xcprofiler/execution"
+require "xcprofiler/profiler"
+require "xcprofiler/version"
+require "xcprofiler/reporters/abstract_reporter"
+require "xcprofiler/reporters/standard_output_reporter"
+require "xcprofiler/reporters/json_reporter"
 require "colorize"
 require "optparse"
 require "ostruct"
 
-module Xctracker
+module Xcprofiler
   class << self
     def execute(args)
       options = OpenStruct.new
@@ -18,7 +18,7 @@ module Xctracker
       options.reporters = [:standard_output]
 
       parser = OptionParser.new do |opts|
-        opts.banner = "Usage: xctracker [product name or .xcactivitylog file] [options]".red
+        opts.banner = "Usage: xcprofiler [product name or .xcactivitylog file] [options]".red
 
         opts.on("--[no-]show-invalids", "Show invalid location results") { |v| options.show_invalid_locations = v }
         opts.on("-o [ORDER]", [:default, :time, :file], "Sort order") { |v| options.order = v }
@@ -40,16 +40,16 @@ module Xctracker
 
       begin
         if target.end_with?('.xcactivitylog')
-          tracker = Tracker.by_path(target)
+          profiler = Profiler.by_path(target)
         else
-          tracker = Tracker.by_product_name(target)
+          profiler = Profiler.by_product_name(target)
         end
-        tracker.reporters = [
+        profiler.reporters = [
           StandardOutputReporter.new(limit: options[:limit],
                                      order: order,
                                      show_invalid_locations: options[:show_invalid_locations])
         ]
-        tracker.report!
+        profiler.report!
       rescue Exception => e
         puts e.message.red
       end

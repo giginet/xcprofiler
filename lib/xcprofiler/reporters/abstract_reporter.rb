@@ -1,4 +1,4 @@
-module Xctracker
+module Xcprofiler
   class AbstractReporter
     attr_reader :options
 

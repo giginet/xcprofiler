@@ -1,14 +1,14 @@
 require 'spec_helper'
-include Xctracker
+include Xcprofiler
 
-describe Tracker do
+describe Profiler do
 
   before do
     fixture_root = File.absolute_path(File.join(__FILE__, '../fixtures'))
     allow(DerivedData).to receive(:derived_data_root).and_return(fixture_root)
   end
 
-  let(:tracker) { Tracker.new(derived_data) }
+  let(:profiler) { Profiler.new(derived_data) }
 
   context 'with flag not enabled data' do
     let(:derived_data) { DerivedData.by_product_name('Invalid') }
@@ -16,7 +16,7 @@ describe Tracker do
     describe '#report!' do
       it 'raises error' do
         expect {
-          tracker.report!
+          profiler.report!
         }.to raise_error(BuildFlagIsNotEnabled, "'-Xfrontend -debug-time-function-bodies' flag is not enabled")
       end
     end
@@ -29,11 +29,11 @@ describe Tracker do
       let(:reporter) { double('Reporter') }
       before do
         allow(reporter).to receive(:report!).with(an_instance_of(Array))
-        tracker.reporters = [reporter]
+        profiler.reporters = [reporter]
       end
 
       it 'reporters are invoked' do
-        tracker.report!
+        profiler.report!
         expect(reporter).to have_received(:report!).with(an_instance_of(Array))
       end
     end

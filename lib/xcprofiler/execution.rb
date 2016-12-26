@@ -1,4 +1,4 @@
-module Xctracker
+module Xcprofiler
   class Execution
     Struct.new('Position', :path, :line, :column)
 

@@ -1,4 +1,4 @@
-module Xctracker
+module Xcprofiler
   class DerivedDataNotFound < Exception
   end
 

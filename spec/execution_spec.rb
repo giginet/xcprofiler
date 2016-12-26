@@ -1,5 +1,5 @@
 require 'spec_helper'
-include Xctracker
+include Xcprofiler
 
 describe Execution do
   context 'with location' do

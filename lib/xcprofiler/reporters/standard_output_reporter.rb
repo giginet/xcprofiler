@@ -1,6 +1,6 @@
 require 'terminal-table'
 
-module Xctracker
+module Xcprofiler
   class StandardOutputReporter < AbstractReporter
     def report!(executions)
       filtered = filter_executions(executions)

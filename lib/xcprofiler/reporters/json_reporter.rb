@@ -1,6 +1,6 @@
 require 'json'
 
-module Xctracker
+module Xcprofiler
   class JSONReporter < AbstractReporter
     def report!(executions)
       json = filter_executions(executions).map(&:to_h)

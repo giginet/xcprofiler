@@ -1,40 +1,40 @@
-# xctracker 
+# xcprofiler
 
-[![Build Status](https://travis-ci.org/giginet/xctracker.svg?branch=master)](https://travis-ci.org/giginet/xctracker)
-[![Coverage Status](https://coveralls.io/repos/github/giginet/xctracker/badge.svg?branch=master)](https://coveralls.io/github/giginet/xctracker?branch=master)
-[![Gem Version](https://badge.fury.io/rb/xctracker.svg)](https://badge.fury.io/rb/xctracker)
+[![Build Status](https://travis-ci.org/giginet/xcprofiler.svg?branch=master)](https://travis-ci.org/giginet/xcprofiler)
+[![Coverage Status](https://coveralls.io/repos/github/giginet/xcprofiler/badge.svg?branch=master)](https://coveralls.io/github/giginet/xcprofiler?branch=master)
+[![Gem Version](https://badge.fury.io/rb/xcprofiler.svg)](https://badge.fury.io/rb/xcprofiler)
 
 Command line utility to analyze build times of Swift projects
 
-![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/sample_output.png)
+![](https://raw.githubusercontent.com/giginet/xcprofiler/master/assets/sample_output.png)
 
 This tool developed in working time for Cookpad.
 
 ## Installation
 
 ```
-gem install xctracker
+gem install xcprofiler
 ```
 
 ## Usage
 
 1. Add `-Xfrontend -debug-time-function-bodies` build flags in `Other Swift Flags` section on your Xcode project.
-    ![](https://raw.githubusercontent.com/giginet/xctracker/master/assets/build_flags.png)
+    ![](https://raw.githubusercontent.com/giginet/xcprofiler/master/assets/build_flags.png)
 
 2. Build your project
-3. Execute `xctracker`
+3. Execute `xcprofiler`
 
 ```
-$ xctracker [PRODUCT_NAME or ACTIVITY_LOG_PATH] [options]
+$ xcprofiler [PRODUCT_NAME or ACTIVITY_LOG_PATH] [options]
 ```
 
-`xctracker` searches the latest build log on your DerivedData directory.
+`xcprofiler` searches the latest build log on your DerivedData directory.
 
 You can also specify the `.xcactivitylog`.
 
 ```
-$ xctracker MyApp
-$ xctracker ~/Library/Developer/Xcode/DerivedData/MyApp-xxxxxxxxxxx/Logs/Build/0761C73D-3B6C-449A-BE89-6D11DAB748FE.xcactivitylog
+$ xcprofiler MyApp
+$ xcprofiler ~/Library/Developer/Xcode/DerivedData/MyApp-xxxxxxxxxxx/Logs/Build/0761C73D-3B6C-449A-BE89-6D11DAB748FE.xcactivitylog
 ```
 
 Sample output is here
@@ -79,19 +79,19 @@ Sample output is here
 You can use reporters to output tracking logs.
 
 ```ruby
-require 'xctracker'
+require 'xcprofiler'
 
-tracker = Xctracker::Tracker.by_product_name('MyApp')
-tracker.reporters = [
-  Xctracker::StandardOutputReporter.new(limit: 20, order: :time)],
-  Xctracker::JSONReporter.new({output_path: 'result.json'})
+profiler = Xcprofiler::Profiler.by_product_name('MyApp')
+profiler.reporters = [
+  Xcprofiler::StandardOutputReporter.new(limit: 20, order: :time)],
+  Xcprofiler::JSONReporter.new({output_path: 'result.json'})
 ]
-tracker.report!
+profiler.report!
 ```
 
 You can also implement your own reporters.
 
-See implementation of [built-in reporters](https://github.com/giginet/xctracker/tree/master/lib/xctracker/reporters) for detail.
+See implementation of [built-in reporters](https://github.com/giginet/xcprofiler/tree/master/lib/xcprofiler/reporters) for detail.
 
 ## License
 
@@ -99,5 +99,5 @@ MIT License
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/giginet/xctracker.
+Bug reports and pull requests are welcome on GitHub at https://github.com/giginet/xcprofiler.
 

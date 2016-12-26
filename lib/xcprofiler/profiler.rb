@@ -1,19 +1,19 @@
 require 'terminal-table'
 require 'colorize'
 
-module Xctracker
-  class Tracker
+module Xcprofiler
+  class Profiler
     attr_writer :reporters
     attr_reader :derived_data
 
     def self.by_path(activity_log_path)
       derived_data = DerivedData.new(activity_log_path)
-      Tracker.new(derived_data)
+      Profiler.new(derived_data)
     end
 
     def self.by_product_name(product_name)
       derived_data = DerivedData.by_product_name(product_name)
-      Tracker.new(derived_data)
+      Profiler.new(derived_data)
     end
 
     def initialize(derived_data)

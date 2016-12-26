@@ -1,5 +1,5 @@
 require 'spec_helper'
-include Xctracker
+include Xcprofiler
 
 describe AbstractReporter do
   let(:valid_executions) do
