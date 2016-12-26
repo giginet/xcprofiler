@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/giginet/xcprofiler/badge.svg?branch=master)](https://coveralls.io/github/giginet/xcprofiler?branch=master)
 [![Gem Version](https://badge.fury.io/rb/xcprofiler.svg)](https://badge.fury.io/rb/xcprofiler)
 
-Command line utility to analyze build times of Swift projects
+Command line utility to profile compilation time of Swift project.
 
 ![](https://raw.githubusercontent.com/giginet/xcprofiler/master/assets/sample_output.png)
 
