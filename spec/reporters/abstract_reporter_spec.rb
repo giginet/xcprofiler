@@ -11,7 +11,7 @@ describe AbstractReporter do
   let(:executions) { valid_executions + invalid_executions }
 
   describe '#filter_executions' do
-    let(:filtered_executions) { reporter.send(:filter_executions, executions) }
+    let(:filtered_executions) { reporter.filter_executions(executions) }
     context 'with no options' do
       let(:reporter) { AbstractReporter.new }
 

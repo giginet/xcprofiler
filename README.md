@@ -40,30 +40,30 @@ $ xcprofiler ~/Library/Developer/Xcode/DerivedData/MyApp-xxxxxxxxxxx/Logs/Build/
 Sample output is here
 
 ```
-+--------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
-| File                                             | Line | Method name                                                                                                                              | Time(ms) |
-+--------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
-| Phakchi/Sources/Phakchi/Interaction.swift        | 17   | get {}                                                                                                                                   | 69.9     |
-| Phakchi/Sources/Phakchi/Matcher.swift            | 7    | get {}                                                                                                                                   | 68.9     |
-| Phakchi/Sources/Phakchi/InteractionBuilder.swift | 87   | func clean()                                                                                                                             | 49.8     |
-| Phakchi/Sources/Phakchi/Session.swift            | 74   | public func run(completionBlock: TestCompletionBlock? = default, executionBlock: @escaping TestExecutionBlock)                           | 49.6     |
-| Phakchi/Sources/Phakchi/Session.swift            | 65   | @discardableResult public func willRespondWith(status: Int, headers: Headers? = default, body: Body? = default) -> Self                  | 28.3     |
-| Phakchi/Sources/Phakchi/ControlServer.swift      | 20   | public func startSession(consumerName: String, providerName: String, completion completionBlock: StartSessionCompletionBlock? = default) | 24.6     |
-| Phakchi/Sources/Phakchi/ControlServer.swift      | 24   | (closure)                                                                                                                                | 23.9     |
-| Phakchi/Sources/Phakchi/InteractionBuilder.swift | 19   | private func makeHeaders(_ headers: Headers?, defaultHeaders: Headers?) -> Headers?                                                      | 20.5     |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 47   | func registerInteraction(_ interaction: Interaction, completionHandler: CompletionHandler? = default)                                    | 16.4     |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 60   | func verify(_ completionHandler: VerificationCompletionHandler? = default)                                                               | 14.3     |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 27   | func resumeSessionTask(_ request: URLRequest, completionHandler: CompletionHandler? = default)                                           | 13.3     |
-| Phakchi/Sources/Phakchi/ControlServer.swift      | 32   | public func session(forConsumerName consumerName: String, providerName: String) -> Session?                                              | 9.7      |
-| Phakchi/Sources/Phakchi/InteractionBuilder.swift | 94   | get {}                                                                                                                                   | 5.9      |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 15   | func makePactRequest(to endpoint: String, method: HTTPMethod, headers: [String : String] = default) -> URLRequest                        | 5.3      |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 51   | func registerInteractions(_ interactions: [Interaction], completionHandler: CompletionHandler? = default)                                | 5.1      |
-| Phakchi/Sources/Phakchi/Encodable.swift          | 39   | get {}                                                                                                                                   | 4.8      |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 121  | func start(session consumerName: String, providerName: String, completionHandler: @escaping CreateSessionCompletionHandler)              | 3.7      |
-| Phakchi/Sources/Phakchi/Encodable.swift          | 29   | get {}                                                                                                                                   | 3.4      |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 72   | func writePact(for providerName: String, consumerName: String, exportPath: URL?, completionHandler: CompletionHandler? = default)        | 3.3      |
-| Phakchi/Sources/Phakchi/ServiceClient.swift      | 125  | (closure)                                                                                                                                | 3.1      |
-+--------------------------------------------------+------+------------------------------------------------------------------------------------------------------------------------------------------+----------+
++----------------------+------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+
+| File                 | Line | Method name                                                                                                                                                   | Time(ms) |
++----------------------+------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+
+| ResultProtocol.swift | 132  | public func ==<T : ResultProtocol where T.Value : Equatable, T.Error : Equatable>(left: T, right: T) -> Bool                                                  | 14.2     |
+| Result.swift         | 66   | get {}                                                                                                                                                        | 13.1     |
+| Result.swift         | 78   | public static func error(_ message: String? = default, function: String = #function, file: String = #file, line: Int = #line) -> NSError                      | 6.3      |
+| Result.swift         | 69   | get {}                                                                                                                                                        | 2.2      |
+| Result.swift         | 132  | public func `try`<T>(_ function: String = #function, file: String = #file, line: Int = #line, try: (NSErrorPointer) -> T?) -> Result<T, NSError>              | 1.7      |
+| Result.swift         | 95   | get {}                                                                                                                                                        | 1.4      |
+| Result.swift         | 21   | public init(_ value: T?, failWith: @autoclosure () -> Error)                                                                                                  | 0.9      |
+| Result.swift         | 142  | public func `try`(_ function: String = #function, file: String = #file, line: Int = #line, try: (NSErrorPointer) -> Bool) -> Result<(), NSError>              | 0.9      |
+| ResultProtocol.swift | 172  | @available(*, unavailable, renamed: "recover(with:)") public func recoverWith(_ result: @autoclosure () -> Self) -> Self                                      | 0.7      |
+| Result.swift         | 72   | get {}                                                                                                                                                        | 0.6      |
+| Result.swift         | 75   | get {}                                                                                                                                                        | 0.6      |
+| ResultProtocol.swift | 72   | public func recover(_ value: @autoclosure () -> Value) -> Value                                                                                               | 0.5      |
+| ResultProtocol.swift | 111  | public func &&&<L : ResultProtocol, R : ResultProtocol where L.Error == R.Error>(left: L, right: @autoclosure () -> R) -> Result<(L.Value, R.Value), L.Error> | 0.5      |
+| ResultProtocol.swift | 144  | public func !=<T : ResultProtocol where T.Value : Equatable, T.Error : Equatable>(left: T, right: T) -> Bool                                                  | 0.5      |
+| ResultProtocol.swift | 92   | public func tryMap<U>(_ transform: (Value) throws -> U) -> Result<U, Error>                                                                                   | 0.4      |
+| Result.swift         | 175  | @available(*, unavailable, renamed: "success") public static func Success(_: T) -> Result<T, Error>                                                           | 0.3      |
+| ResultProtocol.swift | 55   | public func mapError<Error2>(_ transform: (Error) -> Error2) -> Result<Value, Error2>                                                                         | 0.3      |
+| ResultProtocol.swift | 77   | public func recover(with result: @autoclosure () -> Self) -> Self                                                                                             | 0.3      |
+| ResultProtocol.swift | 93   | (closure)                                                                                                                                                     | 0.3      |
+| Result.swift         | 31   | public init(attempt f: () throws -> T)                                                                                                                        | 0.2      |
++----------------------+------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+
 ```
 
 ### Available Options

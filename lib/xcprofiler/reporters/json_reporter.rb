@@ -3,7 +3,7 @@ require 'json'
 module Xcprofiler
   class JSONReporter < AbstractReporter
     def report!(executions)
-      json = filter_executions(executions).map(&:to_h)
+      json = executions.map(&:to_h)
       unless output_path
         raise OutputPathIsNotSpecified, '[JSONReporter] output_path is not specified'
       end

@@ -28,6 +28,7 @@ describe Profiler do
     describe '#report' do
       let(:reporter) { double('Reporter') }
       before do
+        allow(reporter).to receive(:filter_executions).with(an_instance_of(Array)).and_return([])
         allow(reporter).to receive(:report!).with(an_instance_of(Array))
         profiler.reporters = [reporter]
       end
