@@ -6,6 +6,8 @@ module Xcprofiler
       puts table_for(executions)
     end
 
+    private
+
     def table_for(executions)
       Terminal::Table.new do |t|
         t << ['File', 'Line', 'Method name', 'Time(ms)']

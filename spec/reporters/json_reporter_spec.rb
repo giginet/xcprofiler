@@ -23,4 +23,14 @@ describe JSONReporter do
       expect(File.exist?(output_path)).to be_truthy
     end
   end
+
+  context 'without output path' do
+    let(:reporter) { JSONReporter.new }
+
+    it 'raises error' do
+      expect {
+        profiler.report!
+      }.to raise_error(OutputPathIsNotSpecified)
+    end
+  end
 end
