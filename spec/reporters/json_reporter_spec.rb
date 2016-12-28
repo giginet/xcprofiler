@@ -22,6 +22,10 @@ describe JSONReporter do
       profiler.report!
       expect(File.exist?(output_path)).to be_truthy
     end
+
+    after do
+      FileUtils.remove_entry dir
+    end
   end
 
   context 'without output path' do
