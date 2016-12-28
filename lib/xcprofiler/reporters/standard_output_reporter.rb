@@ -3,8 +3,7 @@ require 'terminal-table'
 module Xcprofiler
   class StandardOutputReporter < AbstractReporter
     def report!(executions)
-      filtered = filter_executions(executions)
-      puts table_for(filtered)
+      puts table_for(executions)
     end
 
     def table_for(executions)

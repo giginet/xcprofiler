@@ -26,8 +26,8 @@ module Xcprofiler
       end
 
       reporters.each do |reporter|
-        reporter = reporter
-        reporter.report!(derived_data.executions)
+        filtered = reporter.filter_executions(derived_data.executions)
+        reporter.report!(filtered)
       end
     end
 

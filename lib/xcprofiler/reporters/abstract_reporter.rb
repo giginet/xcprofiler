@@ -10,14 +10,14 @@ module Xcprofiler
       raise NotImplementedError, 'Not implemented'
     end
 
-    protected
-
     def filter_executions(executions)
       executions = sort_executions(executions, order)
       executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
       executions = executions[0...limit] if limit
       executions
     end
+
+    protected
 
     def sort_executions(executions, order)
       case order
