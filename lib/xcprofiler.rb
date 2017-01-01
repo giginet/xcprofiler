@@ -23,6 +23,7 @@ module Xcprofiler
         opts.on("--[no-]show-invalids", "Show invalid location results") { |v| options.show_invalid_locations = v }
         opts.on("-o [ORDER]", [:default, :time, :file], "Sort order") { |v| options.order = v }
         opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
+        opts.on("--lower-limit [LOWER_LIMIT]", Integer, "Lower limit on time(ms)") { |v| options.lower_limit = v }
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit
@@ -46,6 +47,7 @@ module Xcprofiler
         end
         profiler.reporters = [
           StandardOutputReporter.new(limit: options[:limit],
+                                     lower_limit: options[:lower_limit],
                                      order: order,
                                      show_invalid_locations: options[:show_invalid_locations])
         ]

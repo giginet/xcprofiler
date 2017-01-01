@@ -14,6 +14,7 @@ module Xcprofiler
       executions = sort_executions(executions, order)
       executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
       executions = executions[0...limit] if limit
+      executions = executions.delete_if{ |v| v.time < lower_limit} if lower_limit
       executions
     end
 
@@ -32,6 +33,10 @@ module Xcprofiler
 
     def limit
       options[:limit]
+    end
+
+    def lower_limit
+      options[:lower_limit]
     end
 
     def show_invalid_locations?
