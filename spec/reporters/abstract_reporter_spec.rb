@@ -63,12 +63,42 @@ describe AbstractReporter do
 
     end
 
-    context 'with lower_limit' do
+    context 'with lower_limit 0' do
+      let(:reporter) { AbstractReporter.new({lower_limit: 0}) }
+
+      it 'returns filtered executions' do
+        expect(filtered_executions.size).to eql(10)
+        expect(filtered_executions.first).to eql(valid_executions.last)
+      end
+
+    end
+
+    context 'with lower_limit 1' do
       let(:reporter) { AbstractReporter.new({lower_limit: 1}) }
 
       it 'returns filtered executions' do
         expect(filtered_executions.size).to eql(9)
         expect(filtered_executions.first).to eql(valid_executions.last)
+      end
+
+    end
+
+    context 'with lower_limit 9' do
+      let(:reporter) { AbstractReporter.new({lower_limit: 9}) }
+
+      it 'returns filtered executions' do
+        expect(filtered_executions.size).to eql(1)
+        expect(filtered_executions.first).to eql(valid_executions.last)
+      end
+
+    end
+
+    context 'with lower_limit 10' do
+      let(:reporter) { AbstractReporter.new({lower_limit: 10}) }
+
+      it 'returns filtered executions' do
+        expect(filtered_executions.size).to eql(0)
+        expect(filtered_executions.first).to be_nil
       end
 
     end
