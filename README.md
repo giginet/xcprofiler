@@ -71,7 +71,7 @@ Sample output is here
 |option|shorthand|description|
 |------|---------|-----------|
 |--limit|-l|Limit for display|
-|--threshold||Threshold of time to display(ms)|
+|--threshold||Threshold of time to display (ms)|
 |--show-invalids||Show invalid location results|
 |--order|-o|Sort order (default,time,file)|
 
