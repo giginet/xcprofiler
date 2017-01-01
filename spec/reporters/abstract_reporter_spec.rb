@@ -63,6 +63,16 @@ describe AbstractReporter do
 
     end
 
+    context 'with lower_limit' do
+      let(:reporter) { AbstractReporter.new({lower_limit: 1}) }
+
+      it 'returns filtered executions' do
+        expect(filtered_executions.size).to eql(9)
+        expect(filtered_executions.first).to eql(valid_executions.last)
+      end
+
+    end
+
     context 'with show_invalid_locations' do
       let(:reporter) { AbstractReporter.new({show_invalid_locations: true}) }
 
