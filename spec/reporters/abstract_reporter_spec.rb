@@ -63,8 +63,8 @@ describe AbstractReporter do
 
     end
 
-    context 'with lower_limit 0' do
-      let(:reporter) { AbstractReporter.new({lower_limit: 0}) }
+    context 'with threshold 0' do
+      let(:reporter) { AbstractReporter.new({threshold: 0}) }
 
       it 'returns filtered executions' do
         expect(filtered_executions.size).to eql(10)
@@ -73,8 +73,8 @@ describe AbstractReporter do
 
     end
 
-    context 'with lower_limit 1' do
-      let(:reporter) { AbstractReporter.new({lower_limit: 1}) }
+    context 'with threshold 1' do
+      let(:reporter) { AbstractReporter.new({threshold: 1}) }
 
       it 'returns filtered executions' do
         expect(filtered_executions.size).to eql(9)
@@ -83,8 +83,8 @@ describe AbstractReporter do
 
     end
 
-    context 'with lower_limit 9' do
-      let(:reporter) { AbstractReporter.new({lower_limit: 9}) }
+    context 'with threshold 9' do
+      let(:reporter) { AbstractReporter.new({threshold: 9}) }
 
       it 'returns filtered executions' do
         expect(filtered_executions.size).to eql(1)
@@ -93,8 +93,8 @@ describe AbstractReporter do
 
     end
 
-    context 'with lower_limit 10' do
-      let(:reporter) { AbstractReporter.new({lower_limit: 10}) }
+    context 'with threshold 10' do
+      let(:reporter) { AbstractReporter.new({threshold: 10}) }
 
       it 'returns filtered executions' do
         expect(filtered_executions.size).to eql(0)
