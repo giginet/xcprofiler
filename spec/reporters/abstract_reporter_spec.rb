@@ -161,7 +161,6 @@ describe AbstractReporter do
         end
       end
 
-
       context 'with threshold and show_invalid_locations' do
         let(:reporter) { AbstractReporter.new({threshold: threshold, show_invalid_locations: show_invalid_locations}) }
 
