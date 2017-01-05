@@ -13,8 +13,8 @@ module Xcprofiler
     def filter_executions(executions)
       executions = sort_executions(executions, order)
       executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
-      executions = executions[0...limit] if limit
       executions = executions.delete_if { |v| v.time < threshold } if threshold
+      executions = executions[0...limit] if limit
       executions
     end
 
@@ -27,7 +27,7 @@ module Xcprofiler
         when :time
           executions.sort { |a, b| [b.time, (a.filename or ''), (a.line or 0)] <=> [a.time, (b.filename or ''), (b.line or 0)] }
         when :file
-          executions.sort { |a, b| [(a.filename or ''), (a.line or 0)] <=> [(b.filename or ''), (b.line or 0)] }
+          executions.sort { |a, b| [(a.filename or ''), (a.line or 0), b.time] <=> [(b.filename or ''), (b.line or 0), a.time] }
       end
     end
 
