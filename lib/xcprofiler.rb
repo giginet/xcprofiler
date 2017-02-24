@@ -24,6 +24,7 @@ module Xcprofiler
         opts.on("-o [ORDER]", [:default, :time, :file], "Sort order") { |v| options.order = v }
         opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
         opts.on("--threshold [THRESHOLD]", Integer, "Threshold of time to display(ms)") { |v| options.threshold = v }
+        opts.on("--derived_data_path", String, "Root path of DerivedData") { |v| options.derived_data_path = v }
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit
@@ -43,7 +44,8 @@ module Xcprofiler
         if target.end_with?('.xcactivitylog')
           profiler = Profiler.by_path(target)
         else
-          profiler = Profiler.by_product_name(target)
+          derived_data_path = options[:derived_data_path]
+          profiler = Profiler.by_product_name(target, derived_data_path)
         end
         profiler.reporters = [
           StandardOutputReporter.new(limit: options[:limit],

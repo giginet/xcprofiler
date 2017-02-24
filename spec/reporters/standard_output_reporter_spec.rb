@@ -11,7 +11,7 @@ describe StandardOutputReporter do
 
   before do
     fixture_root = File.absolute_path(File.join(__FILE__, '../../fixtures'))
-    allow(DerivedData).to receive(:derived_data_root).and_return(fixture_root)
+    allow(DerivedData).to receive(:default_derived_data_root).and_return(fixture_root)
     allow(reporter).to receive(:table_for)
   end
 
