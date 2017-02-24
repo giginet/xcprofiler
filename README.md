@@ -74,7 +74,7 @@ Sample output is here
 |--threshold||Threshold of time to display (ms)|
 |--show-invalids||Show invalid location results|
 |--order|-o|Sort order (default,time,file)|
-|--derived_data_path||Root path of DerivedData directory|
+|--derived-data-path||Root path of DerivedData directory|
 
 ## Use custom reporters
 
