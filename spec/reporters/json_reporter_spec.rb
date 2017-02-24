@@ -3,15 +3,12 @@ include Xcprofiler
 
 describe JSONReporter do
   let(:profiler) do
-    Profiler.by_product_name('MyApp').tap do |profiler|
+    Profiler.by_product_name('MyApp', derived_data_root).tap do |profiler|
       profiler.reporters = [reporter]
     end
   end
 
-  before do
-    fixture_root = File.absolute_path(File.join(__FILE__, '../../fixtures'))
-    allow(DerivedData).to receive(:default_derived_data_root).and_return(fixture_root)
-  end
+  let(:derived_data_root) { File.absolute_path(File.join(__FILE__, '../../fixtures')) }
 
   context 'with output path' do
     let(:dir) { Dir.mktmpdir }
