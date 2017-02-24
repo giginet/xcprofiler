@@ -11,8 +11,8 @@ module Xcprofiler
       Profiler.new(derived_data)
     end
 
-    def self.by_product_name(product_name)
-      derived_data = DerivedData.by_product_name(product_name)
+    def self.by_product_name(product_name, default_derived_data_root = nil)
+      derived_data = DerivedData.by_product_name(product_name, default_derived_data_root)
       Profiler.new(derived_data)
     end
 

@@ -3,13 +3,15 @@ require 'zlib'
 module Xcprofiler
   class DerivedData
     class << self
-      def all
-        pattern = File.join(derived_data_root, "**", "Logs", "Build", "*.xcactivitylog")
+      def all(root = nil)
+        root ||= default_derived_data_root
+        pattern = File.join(root, "**", "Logs", "Build", "*.xcactivitylog")
         by_pattern(pattern)
       end
 
-      def by_product_name(product_name)
-        pattern = File.join(derived_data_root, "#{product_name}-*", "Logs", "Build", "*.xcactivitylog")
+      def by_product_name(product_name, root = nil)
+        root ||= default_derived_data_root
+        pattern = File.join(root, "#{product_name}-*", "Logs", "Build", "*.xcactivitylog")
         by_pattern(pattern)
       end
 
@@ -27,7 +29,7 @@ module Xcprofiler
         derived_data.max_by { |data| data.updated_at }
       end
 
-      def derived_data_root
+      def default_derived_data_root
         File.expand_path('~/Library/Developer/Xcode/DerivedData')
       end
     end
