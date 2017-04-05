@@ -44,7 +44,7 @@ module Xcprofiler
 
     def executions
       @executions ||= lines.map { |line|
-        if line =~ /^\d*\.?\dms\t/
+        if line =~ /^[0-9.]+ms\s+.+?\s+.+$/
           time, file, method_name = line.split(/\t/)
           Execution.new(time, file, method_name)
         end
