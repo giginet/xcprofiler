@@ -13,12 +13,12 @@ module Xcprofiler
         t << ['File', 'Line', 'Method name', 'Time(ms)']
         t << :separator
         executions.each do |execution|
-          t << [execution.filename, execution.line, truncate(execution.method_name), execution.time]
+          t << [execution.filename, execution.line, truncate(execution.method_name, truncate_at), execution.time]
         end
       end
     end
 
-    def truncate(text)
+    def truncate(text, truncate_at)
       return text unless text.length >= truncate_at
 
       omission = '...'

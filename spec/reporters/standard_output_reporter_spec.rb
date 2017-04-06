@@ -19,4 +19,9 @@ describe StandardOutputReporter do
     profiler.report!
     expect(reporter).to have_received(:table_for)
   end
+
+  it 'truncate procedure-name' do
+    expect(reporter.send(:truncate, "xx" * 10, 10)).to eql("x"*7+"...")
+  end
+
 end
