@@ -75,7 +75,7 @@ Sample output is here
 |--show-invalids||Show invalid location results|
 |--order|-o|Sort order (default,time,file)|
 |--derived-data-path||Root path of DerivedData directory|
-|--truncate_at|-t|Truncate the method name with specified length|
+|--truncate-at|-t|Truncate the method name with specified length|
 
 ## Use custom reporters
 
