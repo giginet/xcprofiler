@@ -20,8 +20,7 @@ describe StandardOutputReporter do
     expect(reporter).to have_received(:table_for)
   end
 
-  it 'truncate procedure-name' do
-    expect(reporter.send(:truncate, "xx" * 10, 10)).to eql("x"*7+"...")
+  it 'truncate procedure-name with a valid value' do
+    expect(reporter.send(:truncate, "x" * 10, 10)).to eql("x" * 7 + "...")
   end
-
 end
