@@ -13,7 +13,7 @@ module Xcprofiler
         t << ['File', 'Line', 'Method name', 'Time(ms)']
         t << :separator
         executions.each do |execution|
-          t << [execution.filename, execution.line, execution.method_name, execution.time]
+          t << [execution.filename, execution.line, truncate(execution.method_name), execution.time]
         end
       end
     end
