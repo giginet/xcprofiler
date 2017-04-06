@@ -25,7 +25,7 @@ module Xcprofiler
         opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
         opts.on("--threshold [THRESHOLD]", Integer, "Threshold of time to display(ms)") { |v| options.threshold = v }
         opts.on("--derived-data-path", String, "Root path of DerivedData") { |v| options.derived_data_path = v }
-        opts.on("-t", "--truncate [TRUNCATE_LIMIT]", Integer, "Truncate the method name with specified length.") { |v| options.truncate_limit = v }
+        opts.on("-t", "--truncate_at [TRUNCATE_AT]", Integer, "Truncate the method name with specified length.") { |v| options.truncate_at = v }
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit
@@ -53,7 +53,7 @@ module Xcprofiler
                                      threshold: options[:threshold],
                                      order: order,
                                      show_invalid_locations: options[:show_invalid_locations],
-                                     truncate_limit: options[:truncate_limit])
+                                     truncate_at: options[:truncate_at])
         ]
         profiler.report!
       rescue Exception => e

@@ -2,7 +2,7 @@ module Xcprofiler
   class AbstractReporter
     attr_reader :options
 
-    DEFAULT_TRUNCATE_LIMIT = 150
+    DEFAULT_TRUNCATE_AT = 150
 
     def initialize(options = {})
       @options = options
@@ -49,16 +49,8 @@ module Xcprofiler
       options[:order] || :time
     end
 
-    def truncate_limit
-      options[:truncate_limit] ||= DEFAULT_TRUNCATE_LIMIT
-    end
-
-    def truncate(text)
-      return text unless text.length >= truncate_limit
-
-      omission = '...'
-      length_with_room_for_omission = truncate_limit - omission.length
-      "#{text[0...length_with_room_for_omission]}#{omission}"
+    def truncate_at
+      options[:truncate_at] ||= DEFAULT_TRUNCATE_AT
     end
   end
 end

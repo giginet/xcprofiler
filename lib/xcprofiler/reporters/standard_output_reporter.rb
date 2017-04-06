@@ -17,5 +17,13 @@ module Xcprofiler
         end
       end
     end
+
+    def truncate(text)
+      return text unless text.length >= truncate_at
+
+      omission = '...'
+      length_with_room_for_omission = truncate_at - omission.length
+      "#{text[0...length_with_room_for_omission]}#{omission}"
+    end
   end
 end
