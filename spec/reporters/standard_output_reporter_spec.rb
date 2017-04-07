@@ -20,19 +20,17 @@ describe StandardOutputReporter do
     expect(reporter).to have_received(:table_for)
   end
 
-  describe 'procedure-name truncation' do
+  describe '#truncate' do
     context 'with a valid value' do
       it { expect(reporter.send(:truncate, "x" * 10, 10)).to eql("x" * 7 + "...") }
     end
 
-    context 'with an invalid value' do
-      it 'the text is too short' do
-        expect(reporter.send(:truncate, "x" * 9, 10)).to eql("x" * 9)
-      end
+    context 'with too short text' do
+      it { expect(reporter.send(:truncate, "x" * 9, 10)).to eql("x" * 9) }
+    end
 
-      it 'truncate_at is too short' do
-        expect(reporter.send(:truncate, "x" * 10 , 2)).to eql("x" * 10)
-      end
+    context 'with too short truncate_at' do
+      it { expect(reporter.send(:truncate, "x" * 10 , 2)).to eql("x" * 10) }
     end
   end
 end
