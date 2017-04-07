@@ -34,7 +34,11 @@ module Xcprofiler
     private
 
     def reporters
-      @reporters ||= [StandardOutputReporter.new(limit: options[:limit], threshold: options[:threshold], order: options[:order])]
+      @reporters ||= [StandardOutputReporter.new(limit: options[:limit],
+                                                 threshold: options[:threshold],
+                                                 order: options[:order],
+                                                 truncate_at: options[:truncate_at])
+                     ]
     end
   end
 end

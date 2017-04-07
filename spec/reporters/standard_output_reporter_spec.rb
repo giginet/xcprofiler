@@ -19,4 +19,18 @@ describe StandardOutputReporter do
     profiler.report!
     expect(reporter).to have_received(:table_for)
   end
+
+  describe '#truncate' do
+    context 'with a valid value' do
+      it { expect(reporter.send(:truncate, "x" * 10, 10)).to eql("x" * 7 + "...") }
+    end
+
+    context 'with too short text' do
+      it { expect(reporter.send(:truncate, "x" * 9, 10)).to eql("x" * 9) }
+    end
+
+    context 'with too short truncate_at' do
+      it { expect(reporter.send(:truncate, "x" * 10 , 2)).to eql("x" * 10) }
+    end
+  end
 end

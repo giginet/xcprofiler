@@ -2,6 +2,8 @@ module Xcprofiler
   class AbstractReporter
     attr_reader :options
 
+    DEFAULT_TRUNCATE_AT = 150
+
     def initialize(options = {})
       @options = options
     end
@@ -45,6 +47,10 @@ module Xcprofiler
 
     def order
       options[:order] || :time
+    end
+
+    def truncate_at
+      options[:truncate_at] ||= DEFAULT_TRUNCATE_AT
     end
   end
 end
