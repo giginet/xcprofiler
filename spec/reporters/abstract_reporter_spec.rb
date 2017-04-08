@@ -116,8 +116,9 @@ describe AbstractReporter do
       let(:limit) { 5 }
       let(:threshold) { 1 }
       let(:show_invalid_locations) { true }
+      let(:allow_duplicated) { true }
       context 'with order and limit' do
-        let(:reporter) { AbstractReporter.new({order: order, limit: limit, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({order: order, limit: limit, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
@@ -126,7 +127,7 @@ describe AbstractReporter do
       end
 
       context 'with order and threshold' do
-        let(:reporter) { AbstractReporter.new({order: order, threshold: threshold, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({order: order, threshold: threshold, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(9)
@@ -135,7 +136,7 @@ describe AbstractReporter do
       end
 
       context 'with order and show_invalid_locations' do
-        let(:reporter) { AbstractReporter.new({order: order, show_invalid_locations: show_invalid_locations, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({order: order, show_invalid_locations: show_invalid_locations, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(20)
@@ -144,7 +145,7 @@ describe AbstractReporter do
       end
 
       context 'with limit and threshold' do
-        let(:reporter) { AbstractReporter.new({limit: limit, threshold: threshold, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({limit: limit, threshold: threshold, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
@@ -153,7 +154,7 @@ describe AbstractReporter do
       end
 
       context 'with limit and show_invalid_locations' do
-        let(:reporter) { AbstractReporter.new({limit: limit, show_invalid_locations: show_invalid_locations, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({limit: limit, show_invalid_locations: show_invalid_locations, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
@@ -162,7 +163,7 @@ describe AbstractReporter do
       end
 
       context 'with threshold and show_invalid_locations' do
-        let(:reporter) { AbstractReporter.new({threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(18)
@@ -171,7 +172,7 @@ describe AbstractReporter do
       end
 
       context 'with order, limit and threshold' do
-        let(:reporter) { AbstractReporter.new({order: order, limit: limit, threshold: threshold, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({order: order, limit: limit, threshold: threshold, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
@@ -180,7 +181,7 @@ describe AbstractReporter do
       end
 
       context 'with order, limit and show_invalid_locations' do
-        let(:reporter) { AbstractReporter.new({order: order, limit: limit, show_invalid_locations: show_invalid_locations, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({order: order, limit: limit, show_invalid_locations: show_invalid_locations, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
@@ -189,7 +190,7 @@ describe AbstractReporter do
       end
 
       context 'with order, threshold and show_invalid_locations' do
-        let(:reporter) { AbstractReporter.new({order: order, threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({order: order, threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(18)
@@ -198,7 +199,7 @@ describe AbstractReporter do
       end
 
       context 'with limit, threshold and show_invalid_locations' do
-        let(:reporter) { AbstractReporter.new({limit: limit, threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({limit: limit, threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
@@ -207,7 +208,7 @@ describe AbstractReporter do
       end
 
       context 'with order, limit, threshold and show_invalid_locations' do
-        let(:reporter) { AbstractReporter.new({order: order, limit: limit, threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: true}) }
+        let(:reporter) { AbstractReporter.new({order: order, limit: limit, threshold: threshold, show_invalid_locations: show_invalid_locations, allow_duplicated: allow_duplicated}) }
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
