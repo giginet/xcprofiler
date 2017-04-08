@@ -25,7 +25,11 @@ module Xcprofiler
         opts.on("-l", "--limit [LIMIT]", Integer, "Limit for display") { |v| options.limit = v }
         opts.on("--threshold [THRESHOLD]", Integer, "Threshold of time to display(ms)") { |v| options.threshold = v }
         opts.on("--derived-data-path", String, "Root path of DerivedData") { |v| options.derived_data_path = v }
+<<<<<<< HEAD
         opts.on("-t", "--truncate-at [TRUNCATE_AT]", Integer, "Truncate the method name with specified length") { |v| options.truncate_at = v }
+=======
+        opts.on("--[no-]allow-duplicated", "Allow to display the duplicated results") { |v| options.allow_duplicated = v }
+>>>>>>> <add> allow-duplicated option
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit
@@ -48,13 +52,12 @@ module Xcprofiler
           derived_data_path = options[:derived_data_path]
           profiler = Profiler.by_product_name(target, derived_data_path)
         end
-        profiler.reporters = [
-          StandardOutputReporter.new(limit: options[:limit],
+        profiler.reporters = [StandardOutputReporter.new(limit: options[:limit],
                                      threshold: options[:threshold],
                                      order: order,
                                      show_invalid_locations: options[:show_invalid_locations],
-                                     truncate_at: options[:truncate_at])
-        ]
+                                     truncate_at: options[:truncate_at],
+                                     allow_duplicated: options[:allow_duplicated])]
         profiler.report!
       rescue Exception => e
         puts e.message.red

@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 module Xcprofiler
   class Execution
     Struct.new('Position', :path, :line, :column)
@@ -57,6 +59,10 @@ module Xcprofiler
       else
         nil
       end
+    end
+
+    def record_id
+      Digest::MD5.new.update("#{filename}#{method_name}").to_s
     end
   end
 end

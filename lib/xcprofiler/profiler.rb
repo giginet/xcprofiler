@@ -21,7 +21,7 @@ module Xcprofiler
     end
 
     def report!
-      if !derived_data.flag_enabled?
+      unless derived_data.flag_enabled?
         raise BuildFlagIsNotEnabled, "'-Xfrontend -debug-time-function-bodies' flag is not enabled"
       end
 
