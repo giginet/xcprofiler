@@ -69,7 +69,7 @@ module Xcprofiler
     end
 
     def allow_duplicated
-      options[:allow_duplicated] || true
+      options[:allow_duplicated]
     end
 
     private
