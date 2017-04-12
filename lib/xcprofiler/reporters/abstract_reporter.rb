@@ -35,17 +35,11 @@ module Xcprofiler
     end
 
     def delete_duplicated(executions)
-      already_in_set_ids = []
-      filtered = []
-      time_records = get_time_records(executions)
-
-      executions.each do |e|
-        next if already_in_set_ids.include?(e.record_id)
-        next if time_records[e.record_id] > e.time
-        already_in_set_ids << e.record_id
-        filtered << e
-      end
-      filtered
+      executions.group_by { |execution| 
+        execution.location 
+      }.map { |location, executions| 
+        executions.max { |execution| execution.time }
+      }
     end
 
     def limit
