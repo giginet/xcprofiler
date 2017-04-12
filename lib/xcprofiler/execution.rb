@@ -1,5 +1,3 @@
-require 'digest/md5'
-
 module Xcprofiler
   class Execution
     Struct.new('Location', :path, :line, :column)
