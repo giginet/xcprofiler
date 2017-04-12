@@ -15,7 +15,7 @@ module Xcprofiler
     def filter_executions(executions)
       executions = sort_executions(executions, order)
       executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
-      executions = delete_duplicated(executions) unless allow_duplicated
+      executions = delete_duplicated(executions) if unique
       executions = executions.delete_if { |v| v.time < threshold } if threshold
       executions = executions[0...limit] if limit
       executions
@@ -62,19 +62,8 @@ module Xcprofiler
       options[:truncate_at] ||= DEFAULT_TRUNCATE_AT
     end
 
-    def allow_duplicated
-      options[:allow_duplicated]
-    end
-
-    private
-
-    def get_time_records(executions)
-      memo = {}
-      executions.each do |e|
-        next if memo.has_key?(e.record_id) && memo[e.record_id] > e.time
-        memo[e.record_id] = e.time
-      end
-      memo
+    def unique
+      options[:unique]
     end
   end
 end
