@@ -112,11 +112,22 @@ describe AbstractReporter do
     end
 
     context 'with unique' do
-      let(:reporter) { AbstractReporter.new(unique: true) }
+      context 'with true' do
+        let(:reporter) { AbstractReporter.new(unique: true) }
 
-      it 'returns filtered executions' do
-        expect(filtered_executions.size).to eql(10)
-        expect(filtered_executions.first).to eql(valid_executions.last)
+        it 'returns filtered executions' do
+          expect(filtered_executions.size).to eql(10)
+          expect(filtered_executions.first).to eql(valid_executions.last)
+        end
+      end
+
+      context 'with false' do
+        let(:reporter) { AbstractReporter.new(unique: false) }
+
+        it 'returns filtered executions' do
+          expect(filtered_executions.size).to eql(10)
+          expect(filtered_executions.first).to eql(valid_executions.last)
+        end
       end
     end
 
