@@ -26,7 +26,7 @@ module Xcprofiler
         opts.on("--threshold [THRESHOLD]", Integer, "Threshold of time to display(ms)") { |v| options.threshold = v }
         opts.on("--derived-data-path", String, "Root path of DerivedData") { |v| options.derived_data_path = v }
         opts.on("-t", "--truncate-at [TRUNCATE_AT]", Integer, "Truncate the method name with specified length") { |v| options.truncate_at = v }
-        opts.on("--[no-]unique", "Compact the duplicated results") { |v| options.unique = v }
+        opts.on("--[no-]unique", "Reject duplicated location results or not") { |v| options.unique = v }
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit

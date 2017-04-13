@@ -76,7 +76,7 @@ Sample output is here
 |--order|-o|Sort order (default,time,file)|
 |--derived-data-path||Root path of DerivedData directory|
 |--truncate-at|-t|Truncate the method name with specified length|
-|--unique|Compact the duplicated results|
+|--no-unique|Show the duplicated results|
 
 ## Use custom reporters
 

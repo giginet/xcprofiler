@@ -63,7 +63,8 @@ module Xcprofiler
     end
 
     def unique
-      options[:unique]
+      return options[:unique] unless options[:unique].nil?
+      true
     end
   end
 end
