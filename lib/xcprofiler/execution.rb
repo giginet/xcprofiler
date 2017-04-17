@@ -1,14 +1,14 @@
 module Xcprofiler
   class Execution
-    Struct.new('Position', :path, :line, :column)
+    Struct.new('Location', :path, :line, :column)
 
-    attr_reader :time, :position, :method_name
+    attr_reader :time, :location, :method_name
 
-    def initialize(time, position, method_name)
+    def initialize(time, location, method_name)
       @time = time.to_f
-      unless position =~ /<invalid loc>/
-        path, line, column = position.split(':')
-        @position = Struct::Position.new(path, line.to_i, column.to_i)
+      unless location =~ /<invalid loc>/
+        path, line, column = location.split(':')
+        @location = Struct::Location.new(path, line.to_i, column.to_i)
       end
       @method_name = method_name
     end
@@ -24,12 +24,12 @@ module Xcprofiler
     end
 
     def invalid?
-      !position
+      !location
     end
 
     def path
-      if @position
-        @position.path
+      if @location
+        @location.path
       else
         nil
       end
@@ -44,16 +44,16 @@ module Xcprofiler
     end
 
     def column
-      if @position
-        @position.column
+      if @location
+        @location.column
       else
         nil
       end
     end
 
     def line
-      if @position
-        @position.line
+      if @location
+        @location.line
       else
         nil
       end

@@ -15,6 +15,7 @@ module Xcprofiler
     def filter_executions(executions)
       executions = sort_executions(executions, order)
       executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
+      executions = delete_duplicated(executions) if unique
       executions = executions.delete_if { |v| v.time < threshold } if threshold
       executions = executions[0...limit] if limit
       executions
@@ -31,6 +32,14 @@ module Xcprofiler
         when :file
           executions.sort { |a, b| [(a.filename or ''), (a.line or 0), b.time] <=> [(b.filename or ''), (b.line or 0), a.time] }
       end
+    end
+
+    def delete_duplicated(executions)
+      executions.group_by { |execution| 
+        execution.location 
+      }.map { |location, executions| 
+        executions.max { |execution| execution.time }
+      }
     end
 
     def limit
@@ -51,6 +60,11 @@ module Xcprofiler
 
     def truncate_at
       options[:truncate_at] ||= DEFAULT_TRUNCATE_AT
+    end
+
+    def unique
+      return options[:unique] unless options[:unique].nil?
+      true
     end
   end
 end
