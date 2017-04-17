@@ -107,26 +107,41 @@ describe AbstractReporter do
 
       it 'returns filtered executions' do
         expect(filtered_executions.size).to eql(11)
-        expect(filtered_executions.first).to eql(invalid_executions[1])
+        expect(filtered_executions.first).to eql(invalid_executions.last)
       end
     end
 
     context 'with unique' do
+      let(:duplicated_executions) { 10.times.map { |time| Execution.new("#{time * 100 + 50}ms", "/path/to/Source.swift:#{10 + time}:20", "get()") } }
+      let(:executions) { valid_executions + duplicated_executions }
+
+      context 'with default value' do
+        let(:reporter) { AbstractReporter.new(unique: true) }
+
+        it 'returns longer executions' do
+          expect(filtered_executions.size).to eql(10)
+          expect(filtered_executions.first).to eql(duplicated_executions.last)
+          expect(filtered_executions.last).to eql(duplicated_executions.first)
+        end
+      end
+
       context 'with true' do
         let(:reporter) { AbstractReporter.new(unique: true) }
 
-        it 'returns filtered executions' do
+        it 'returns longer executions' do
           expect(filtered_executions.size).to eql(10)
-          expect(filtered_executions.first).to eql(valid_executions.last)
+          expect(filtered_executions.first).to eql(duplicated_executions.last)
+          expect(filtered_executions.last).to eql(duplicated_executions.first)
         end
       end
 
       context 'with false' do
         let(:reporter) { AbstractReporter.new(unique: false) }
 
-        it 'returns filtered executions' do
-          expect(filtered_executions.size).to eql(10)
-          expect(filtered_executions.first).to eql(valid_executions.last)
+        it 'returns all executions' do
+          expect(filtered_executions.size).to eql(20)
+          expect(filtered_executions.first).to eql(duplicated_executions.last)
+          expect(filtered_executions.last).to eql(filtered_executions.last)
         end
       end
     end
@@ -160,7 +175,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(11)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
 
@@ -187,7 +202,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
 
@@ -205,7 +220,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(10)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
 
@@ -223,7 +238,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
 
@@ -241,7 +256,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(10)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
 
@@ -259,7 +274,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
 
@@ -277,7 +292,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(limit)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
 
@@ -295,7 +310,7 @@ describe AbstractReporter do
 
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(5)
-          expect(filtered_executions.first).to eql(invalid_executions[1])
+          expect(filtered_executions.first).to eql(invalid_executions.last)
         end
       end
     end 
