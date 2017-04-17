@@ -6,7 +6,7 @@ describe BlockReporter do
     let(:profiler) { Profiler.by_product_name('MyApp', derived_data_root) }
     let(:derived_data_root) { File.absolute_path(File.join(__FILE__, '../../fixtures')) }
 
-    it 'execute block' do
+    it 'executes block' do
       called = false
       executions = nil
 

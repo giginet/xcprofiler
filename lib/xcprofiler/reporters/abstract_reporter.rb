@@ -13,10 +13,10 @@ module Xcprofiler
     end
 
     def filter_executions(executions)
-      executions = sort_executions(executions, order)
       executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
       executions = delete_duplicated(executions) if unique
       executions = executions.delete_if { |v| v.time < threshold } if threshold
+      executions = sort_executions(executions, order)
       executions = executions[0...limit] if limit
       executions
     end
