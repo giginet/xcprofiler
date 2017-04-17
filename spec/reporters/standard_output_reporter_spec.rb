@@ -15,9 +15,11 @@ describe StandardOutputReporter do
     allow(reporter).to receive(:table_for)
   end
 
-  it 'exports json' do
-    profiler.report!
-    expect(reporter).to have_received(:table_for)
+  describe '#report!' do
+    it 'exports table' do
+      profiler.report!
+      expect(reporter).to have_received(:table_for)
+    end
   end
 
   describe '#truncate' do

@@ -26,7 +26,7 @@ describe Profiler do
     end
 
     context 'with derived_data_path' do
-      describe '#report' do
+      describe '#report!' do
         let(:derived_data) { DerivedData.by_product_name('MyApp', derived_data_path) }
 
         before do

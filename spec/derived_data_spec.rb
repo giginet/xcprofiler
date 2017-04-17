@@ -24,7 +24,7 @@ describe DerivedData do
       end
 
       context 'with not existing log' do
-        it 'raises' do
+        it 'raises DerivedDataNotFound' do
           expect {
             DerivedData.by_product_name('NotExist', derived_data_root)
           }.to raise_error(DerivedDataNotFound, 'Any matching derived data are not found')
