@@ -1,6 +1,6 @@
 module Xcprofiler
   class Execution
-    Struct.new('Location', :path, :line, :column)
+    Location = Struct.new(:path, :line, :column)
 
     attr_reader :time, :location, :method_name
 
@@ -8,7 +8,7 @@ module Xcprofiler
       @time = time.to_f
       unless location =~ /<invalid loc>/
         path, line, column = location.split(':')
-        @location = Struct::Location.new(path, line.to_i, column.to_i)
+        @location = Location.new(path, line.to_i, column.to_i)
       end
       @method_name = method_name
     end
