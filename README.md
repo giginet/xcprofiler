@@ -100,6 +100,12 @@ You can also implement your own reporters.
 
 See implementation of [built-in reporters](https://github.com/giginet/xcprofiler/tree/master/lib/xcprofiler/reporters) for detail.
 
+## danger-xcprofiler
+
+You can integrate xcprofiler to [danger](https://github.com/danger/danger).
+
+https://github.com/giginet/danger-xcprofiler
+
 ## License
 
 MIT License
