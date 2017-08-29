@@ -28,7 +28,7 @@ module Xcprofiler
         opts.on("--derived-data-path", String, "Root path of DerivedData") { |v| options.derived_data_path = v }
         opts.on("-t", "--truncate-at [TRUNCATE_AT]", Integer, "Truncate the method name with specified length") { |v| options.truncate_at = v }
         opts.on("--[no-]unique", "Reject duplicated location results or not") { |v| options.unique = v }
-        opts.on("--output-path [PATH]", String, "File path to output reporters' result") { |v| options.output_path = v }
+        opts.on("--output [PATH]", String, "File path to output reporters' result") { |v| options.output = v }
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit
@@ -61,9 +61,9 @@ module Xcprofiler
             unique: options[:unique]
         }
         reporters = [StandardOutputReporter.new(reporter_args)]
-        if options[:output_path]
+        if options[:output]
           json_args = options.dup
-          json_args[:output_path] = options[:output_path]
+          json_args[:output] = options[:output]
           reporters << JSONReporter.new(json_args)
         end
 
