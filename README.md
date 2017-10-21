@@ -16,6 +16,8 @@ This tool is developed in working time for Cookpad.
 gem install xcprofiler
 ```
 
+xcprofiler is tested on latest Ruby 2.3/2.4.
+
 ## Usage
 
 1. Add `-Xfrontend -debug-time-function-bodies` build flags in `Other Swift Flags` section on your Xcode project.
