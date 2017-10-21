@@ -20,7 +20,7 @@ xcprofiler is tested on latest Ruby 2.3/2.4.
 
 ## Usage
 
-1. Add `-Xfrontend -debug-time-function-bodies` build flags in `Other Swift Flags` section on your Xcode project.
+1. Add `-Xfrontend -debug-time-function-bodies` build flags in `Build Settings` -> `Other Swift Flags` section of your Xcode project.
     ![](https://raw.githubusercontent.com/giginet/xcprofiler/master/assets/build_flags.png)
 
 2. Build your project
