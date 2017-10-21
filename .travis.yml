@@ -3,15 +3,9 @@ cache: bundler
 script:
   - "bundle exec rspec spec"
 rvm:
-  # OS X 10.9.5-10.10.0 (2.0.0-p481)
-  - 2.0.0-p481
-  # OS X 10.9.3-10.9.4
-  - 2.0.0-p451
-  - 2.3.1
+  - 2.3.5
+  - 2.4.2
 matrix:
   include:
-    - rvm: system
-      osx_image: xcode8.1
-      language: objective-c
-      before_install: sudo gem install bundler
-    - rvm: 2.3.1
+    - rvm: 2.3.5
+    - rvm: 2.4.2
