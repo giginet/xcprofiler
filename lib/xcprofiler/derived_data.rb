@@ -26,7 +26,7 @@ module Xcprofiler
           raise DerivedDataNotFound, 'Any matching derived data are not found'
         end
 
-        derived_data.max_by { |data| data.updated_at }
+        derived_data.select { |data| !data.zero? }.max_by { |data| data.updated_at }
       end
 
       def default_derived_data_root
@@ -36,6 +36,10 @@ module Xcprofiler
 
     def initialize(path)
       @path = path
+    end
+
+    def zero?
+      File.zero?(@path)
     end
 
     def updated_at
