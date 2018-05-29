@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/giginet/xcprofiler.svg?branch=master)](https://travis-ci.org/giginet/xcprofiler)
 [![Coverage Status](https://coveralls.io/repos/github/giginet/xcprofiler/badge.svg?branch=master)](https://coveralls.io/github/giginet/xcprofiler?branch=master)
 [![Gem Version](https://badge.fury.io/rb/xcprofiler.svg)](https://badge.fury.io/rb/xcprofiler)
+[![Gem Download](https://img.shields.io/gem/dt/xcprofiler.svg)](https://badge.fury.io/rb/xcprofiler)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 Command line utility to profile compilation time of Swift project.
 
