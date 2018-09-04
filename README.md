@@ -81,6 +81,7 @@ Sample output is here
 |--derived-data-path||Root path of DerivedData directory|
 |--truncate-at|-t|Truncate the method name with specified length|
 |--no-unique||Show the duplicated results|
+|--per-file||Show sum time per file|
 
 ## Use custom reporters
 

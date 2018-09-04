@@ -15,6 +15,7 @@ module Xcprofiler
     def filter_executions(executions)
       executions = executions.delete_if(&:invalid?) unless show_invalid_locations?
       executions = delete_duplicated(executions) if unique
+      executions = group_by_executions_per_file(executions) if per_file
       executions = executions.delete_if { |v| v.time < threshold } if threshold
       executions = sort_executions(executions, order)
       executions = executions[0...limit] if limit
@@ -42,6 +43,15 @@ module Xcprofiler
       }
     end
 
+    def group_by_executions_per_file(executions)
+      executions.group_by { |execution|
+        execution.path
+      }.map { |path, executions|
+        time = executions.sum { |execution| execution.time }
+        Execution.new(time, "#{path}:0:0", '')
+      }
+    end
+
     def limit
       options[:limit]
     end
@@ -65,6 +75,10 @@ module Xcprofiler
     def unique
       return options[:unique] unless options[:unique].nil?
       true
+    end
+
+    def per_file
+      options[:per_file] || false
     end
   end
 end

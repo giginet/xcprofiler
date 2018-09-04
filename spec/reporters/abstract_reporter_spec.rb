@@ -146,12 +146,26 @@ describe AbstractReporter do
       end
     end
 
+    context 'with per_file' do
+      let(:reporter) { AbstractReporter.new(per_file: true) }
+
+      it 'returns filtered executions' do
+        expect(filtered_executions.size).to eql(1)
+        expect(filtered_executions.first.path).to eql('/path/to/Source.swift')
+        expect(filtered_executions.first.line).to eql(0)
+        expect(filtered_executions.first.column).to eql(0)
+        expect(filtered_executions.first.time).to eql(45.0)
+        expect(filtered_executions.first.method_name).to eql('')
+      end
+    end
+
     context 'with multi_options' do
       let(:order) { :file }
       let(:limit) { 5 }
       let(:threshold) { 1 }
       let(:show_invalid_locations) { true }
       let(:unique) { true }
+      let(:per_file) { true }
       context 'with order and limit' do
         let(:reporter) { AbstractReporter.new(order: order, limit: limit) }
 
@@ -221,6 +235,24 @@ describe AbstractReporter do
         it 'returns filtered executions' do
           expect(filtered_executions.size).to eql(10)
           expect(filtered_executions.first).to eql(invalid_executions.last)
+        end
+      end
+
+      context 'with per_file and show_invalid_locations' do
+        let(:reporter) { AbstractReporter.new(per_file: per_file, show_invalid_locations: show_invalid_locations) }
+
+        it 'returns filtered executions' do
+          expect(filtered_executions.size).to eql(2)
+          expect(filtered_executions.first.path).to eql('/path/to/Source.swift')
+          expect(filtered_executions.first.line).to eql(0)
+          expect(filtered_executions.first.column).to eql(0)
+          expect(filtered_executions.first.time).to eql(45.0)
+          expect(filtered_executions.first.method_name).to eql('')
+          expect(filtered_executions.last.path).to eql('')
+          expect(filtered_executions.last.line).to eql(0)
+          expect(filtered_executions.last.column).to eql(0)
+          expect(filtered_executions.last.time).to eql(9.0)
+          expect(filtered_executions.last.method_name).to eql('')
         end
       end
 
