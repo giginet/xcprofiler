@@ -47,7 +47,7 @@ module Xcprofiler
       executions.group_by { |execution|
         execution.path
       }.map { |path, executions|
-        time = executions.sum { |execution| execution.time }
+        time = executions.map(&:time).reduce(:+)
         Execution.new(time, "#{path}:0:0", '')
       }
     end
