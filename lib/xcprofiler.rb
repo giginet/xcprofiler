@@ -63,7 +63,7 @@ module Xcprofiler
         reporters = [StandardOutputReporter.new(reporter_args)]
         if options[:output]
           json_args = options.dup
-          json_args[:output] = options[:output]
+          json_args[:output_path] = options[:output]
           reporters << JSONReporter.new(json_args)
         end
 
