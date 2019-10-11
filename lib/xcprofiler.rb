@@ -7,7 +7,7 @@ require "xcprofiler/reporters/abstract_reporter"
 require "xcprofiler/reporters/block_reporter"
 require "xcprofiler/reporters/standard_output_reporter"
 require "xcprofiler/reporters/json_reporter"
-require "colorize"
+require "colored2"
 require "optparse"
 require "ostruct"
 

@@ -1,5 +1,5 @@
 require 'terminal-table'
-require 'colorize'
+require 'colored2'
 
 module Xcprofiler
   class Profiler
