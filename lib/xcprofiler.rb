@@ -29,6 +29,7 @@ module Xcprofiler
         opts.on("-t", "--truncate-at [TRUNCATE_AT]", Integer, "Truncate the method name with specified length") { |v| options.truncate_at = v }
         opts.on("--[no-]unique", "Reject duplicated location results or not") { |v| options.unique = v }
         opts.on("--output [PATH]", String, "File path to output reporters' result") { |v| options.output = v }
+        opts.on("--per-file", "Show sum time per file") { |v| options.per_file = v }
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
           exit
@@ -58,7 +59,8 @@ module Xcprofiler
             order: order,
             show_invalid_locations: options[:show_invalid_locations],
             truncate_at: options[:truncate_at],
-            unique: options[:unique]
+            unique: options[:unique],
+            per_file: options[:per_file]
         }
         reporters = [StandardOutputReporter.new(reporter_args)]
         if options[:output]
